@@ -55,5 +55,34 @@ namespace Liveticker_Client
         private void modifyEvent()
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTicketVerfassen_Click(object sender, RoutedEventArgs e)
+        {
+            TickErstellen te = new TickErstellen();
+            te.ShowDialog(); // Öffnen so das das MainWindow nicht mehr anklickbar ist.
+        }
+
+        /// <summary>
+        /// <para>Handled eingaben die an das gesamte Fenster gerichtet sind.</para>
+        /// <para>Wird benötigt um das Fenster zu schließen.</para>
+        /// </summary>
+        /// <param name="sender">...</param>
+        /// <param name="e">...</param>
+        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case System.Windows.Input.Key.Escape:
+                    this.Close();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
