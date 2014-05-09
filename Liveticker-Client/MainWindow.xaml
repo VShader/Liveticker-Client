@@ -3,37 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Liveticker" Height="350" Width="525" FontSize="16" WindowStyle="None" WindowStartupLocation="CenterScreen" MinWidth="525" MinHeight="350" KeyUp="Window_KeyUp">
     <Grid>
-        <TabControl>
-            <TabItem Header="MINI GOLF">
-                <Grid>
-                    <ListView Name="listView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Zeit" />
-                                <GridViewColumn Header="Titel" />
-                                <GridViewColumn Header="Beschreibung" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
-            </TabItem>
-            <TabItem Header="TENNIS">
-                <Grid>
-                    <ListView Name="listView2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="FUSSBALL">
-                <Grid>
-                    <ListView Name="listView3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="KARATE">
-                <Grid>
-                    <ListView Name="listView4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                </Grid>
-            </TabItem>
-        </TabControl>
-        <Button Content="Refresh" Padding="6,6" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TabControl Name="tabControl1" Loaded="tabControl1_Loaded"/>
+        <Button Content="Refresh" Padding="6,6" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnRefresh_Click"/>
         <Button Content="TICK VERFASSEN  >" Padding="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnTicketVerfassen_Click" />
     </Grid>
 </Window>
