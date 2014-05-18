@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Xml;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Liveticker_Client
 {
@@ -44,8 +47,11 @@ namespace Liveticker_Client
         /// <param name="title">...</param>
         /// <param name="description">...</param>
         /// <param name="icon">...</param>
-        private void addEvent(DateTime date, string title, string description, Image icon)
+        private void addEvent(DateTime date, string title, string description, System.Drawing.Image icon)
         {
+            MemoryStream stream = new MemoryStream();
+            icon.Save(stream, ImageFormat.Jpeg);
+            liveTickerService.addEvent(title, description, stream.ToArray(), date);
         }
 
         /// <summary>
@@ -54,6 +60,7 @@ namespace Liveticker_Client
         /// <param name="id">ID des zu löschenden Events</param>
         private void deleteEvent(int id)
         {
+            liveTickerService.deleteEvent(id);
         }
 
         /// <summary>
@@ -62,6 +69,7 @@ namespace Liveticker_Client
         /// <param name="id">ID des zu löschenden Livetickers</param>
         private void deleteLiveticker(int id)
         {
+            liveTickerService.deleteTick(id);
         }
 
         /// <summary>
@@ -70,13 +78,15 @@ namespace Liveticker_Client
         /// <param name="id">ID des zu veröffentlichenden Livetickers</param>
         private void publishLiveticker(int id)
         {
+            liveTickerService.publishTick(id);
         }
 
         /// <summary>
         /// <para>Durch die Schnittstelle modifyEvent soll es möglich sein die Daten eines Events zu bearbeiten, dies beinhaltet Datum, Titel, Beschreibung und Icon.</para>
         /// </summary>
-        private void modifyEvent()
+        private void modifyEvent(int id, string newTitle)
         {
+            liveTickerService.modifyEvent(id, newTitle);
         }
 
         private void tabControl1_Loaded(object sender, RoutedEventArgs e)
