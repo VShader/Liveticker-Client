@@ -1,11 +1,9 @@
 ﻿using System;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Xml;
-using System.IO;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace Liveticker_Client
 {
@@ -14,26 +12,7 @@ namespace Liveticker_Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        public struct Event
-        {
-            public int Id;
-            public string Text;
-        }
-
-        public struct Tick
-        {
-            public string Author;
-            public int EventId;
-            public int Id;
-            public bool IsPublished;
-            public DateTime Modified;
-            public DateTime Reported;
-            public string Text;
-            public string Title;
-        }
-
         private LiveTickerService liveTickerService = new LiveTickerService();
-        private XmlDocument xmlDoc = new XmlDocument();
 
         public MainWindow()
         {
@@ -86,23 +65,14 @@ namespace Liveticker_Client
         /// </summary>
         private void modifyEvent(int id, string newTitle)
         {
-            liveTickerService.modifyEvent(id, newTitle);
+            //liveTickerService.modifyEvent(id, newTitle);
         }
 
         private void tabControl1_Loaded(object sender, RoutedEventArgs e)
         {
-            xmlDoc.LoadXml(liveTickerService.getEvents());
-            //MessageBox.Show(liveTickerService.getEvents()); // Debug
-            XmlNodeList entryNodeList = xmlDoc.GetElementsByTagName("Entry");
-            foreach (XmlNode entryNode in entryNodeList)
+            Event[] events = liveTickerService.getEvents();
+            foreach (Event ev in events)
             {
-                //entryNode.ChildNodes.Item(0).InnerText // <Id> Node
-                //entryNode.ChildNodes.Item(1).InnerText // <Text> Node
-
-                Event ev = new Event();
-                ev.Id = int.Parse(entryNode.ChildNodes.Item(0).InnerText);
-                ev.Text = entryNode.ChildNodes.Item(1).InnerText;
-
                 GridViewColumn gridviewcolumnId = new GridViewColumn();
                 GridViewColumn gridviewcolumnEventId = new GridViewColumn();
                 GridViewColumn gridviewcolumnIsPublished = new GridViewColumn();
@@ -146,7 +116,7 @@ namespace Liveticker_Client
 
                 grid.Children.Add(listview);
 
-                tabitem.Header = ev.Text.ToUpper();
+                tabitem.Header = ev.text.ToUpper();
                 tabitem.Tag = ev;
                 tabitem.Content = grid;
                 tabitem.GotFocus += new RoutedEventHandler(tabitem_GotFocus);
@@ -160,46 +130,29 @@ namespace Liveticker_Client
         private void refreshListView()
         {
             TabItem currTabItem = (TabItem)tabControl1.SelectedItem;
+            if (currTabItem == null)
+            {
+                return; // Nichts zum Aktualisieren vorhanden.
+            }
             ListView currListView = (ListView)((Grid)currTabItem.Content).Children[0];
 
             currListView.Items.Clear();
 
-            xmlDoc.LoadXml(liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).Id));
-            //MessageBox.Show(liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).Id)); // Debug
-            XmlNodeList tickNodeList = xmlDoc.GetElementsByTagName("Tick");
-            foreach (XmlNode tickNode in tickNodeList)
+            Tick[] ticks = liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).id);
+            foreach (Tick tick in ticks)
             {
-                //tickNode.ChildNodes.Item(0).InnerText; // <Id> Node
-                //tickNode.ChildNodes.Item(1).InnerText; // <EventId> Node
-                //tickNode.ChildNodes.Item(2).InnerText; // <IsPublished> Node
-                //tickNode.ChildNodes.Item(3).InnerText; // <Reported> Node
-                //tickNode.ChildNodes.Item(4).InnerText; // <Modified> Node
-                //tickNode.ChildNodes.Item(5).InnerText; // <Author> Node
-                //tickNode.ChildNodes.Item(6).InnerText; // <Title> Node
-                //tickNode.ChildNodes.Item(7).InnerText; // <Text> Node
-
-                Tick tick = new Tick();
-                tick.Id = int.Parse(tickNode.ChildNodes.Item(0).InnerText);
-                tick.EventId = int.Parse(tickNode.ChildNodes.Item(1).InnerText);
-                tick.IsPublished = bool.Parse(tickNode.ChildNodes.Item(2).InnerText);
-                tick.Reported = DateTime.Parse(tickNode.ChildNodes.Item(3).InnerText);
-                tick.Modified = DateTime.Parse(tickNode.ChildNodes.Item(4).InnerText);
-                tick.Author = tickNode.ChildNodes.Item(5).InnerText;
-                tick.Title = tickNode.ChildNodes.Item(6).InnerText;
-                tick.Text = tickNode.ChildNodes.Item(7).InnerText;
-
                 ListViewItem listViewItem = new ListViewItem();
 
                 listViewItem.Content = new
                 {
-                    Id = tick.Id,
-                    EventId = tick.EventId,
-                    IsPublished = tick.IsPublished,
-                    Reported = tick.Reported.ToString("HH:mm"),
-                    Modified = tick.Modified.ToString("HH:mm"),
-                    Author = tick.Author,
-                    Title = tick.Title,
-                    Text = tick.Text
+                    Id = tick.id,
+                    EventId = tick.event_id,
+                    IsPublished = tick.is_published,
+                    Reported = tick.reported.ToString("HH:mm"),
+                    Modified = tick.modified.ToString("HH:mm"),
+                    Author = tick.author,
+                    Title = tick.title,
+                    Text = tick.message
                 };
                 listViewItem.Tag = tick;
 
@@ -221,25 +174,34 @@ namespace Liveticker_Client
         /// <param name="e"></param>
         private void btnTicketVerfassen_Click(object sender, RoutedEventArgs e)
         {
-            TickErstellen te = new TickErstellen();
+            Tick tick = new Tick();
+            TickErstellen te = new TickErstellen(ref tick);
             te.ShowDialog(); // Öffnen so das das MainWindow nicht mehr anklickbar ist.
+
+            if (tick.author != null)
+            {
+                //TODO: später aktivieren
+                //liveTickerService.addTick(tick.event_id, tick.reported, tick.author, tick.title, tick.message);
+            }
         }
+
         private void listViewItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ListViewItem selected = (ListViewItem)sender;
             Tick tick = (Tick)(selected.Tag);
 
             MessageBox.Show("Ticketinformationen:\n"
-                + "ID: " + tick.Id + "\n"
-                + "EventId: " + tick.EventId + "\n"
-                + "IsPublished: " + tick.IsPublished + "\n"
-                + "Reported: " + tick.Reported + "\n"
-                + "Modified: " + tick.Modified + "\n"
-                + "Author: " + tick.Author + "\n"
-                + "Title: " + tick.Title + "\n"
-                + "Text: " + tick.Text
+                + "ID: " + tick.id + "\n"
+                + "EventId: " + tick.event_id + "\n"
+                + "IsPublished: " + tick.is_published + "\n"
+                + "Reported: " + tick.reported + "\n"
+                + "Modified: " + tick.modified + "\n"
+                + "Author: " + tick.author + "\n"
+                + "Title: " + tick.title + "\n"
+                + "Text: " + tick.message
                 );
         }
+
         private void tabitem_GotFocus(object sender, RoutedEventArgs e)
         {
             #region Verhindere Bug

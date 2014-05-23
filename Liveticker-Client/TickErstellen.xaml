@@ -6,7 +6,7 @@
         <Label Content="Titel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,12,0,0" />
         <TextBox Margin="58,16,325,0" Name="tbxTitle" Height="23" VerticalAlignment="Top" />
         <Label Content="Sportart" VerticalAlignment="Top" Margin="0,12,252,0" HorizontalAlignment="Right" Width="67" />
-        <ComboBox Margin="0,12,12,0" Name="cbxSportart" VerticalAlignment="Top" HorizontalAlignment="Right" Width="234" Loaded="cbxSportart_Loaded"/>
+        <ComboBox Margin="0,12,12,0" Name="cbxSportart" VerticalAlignment="Top" HorizontalAlignment="Right" Width="234" Loaded="cbxSportart_Loaded" SelectedIndex="0" />
         <Label Content="Inhalt" HorizontalAlignment="Left" Margin="12,49,0,0" VerticalAlignment="Top" />
         <RichTextBox Margin="12,86,12,12" Name="rtbxBeschreibung" />
         <Button Content="TICK ERSTELLEN  >" Padding="6,6" Name="button1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnTickErstellen_Click" />

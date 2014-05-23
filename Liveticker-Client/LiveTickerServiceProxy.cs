@@ -43,7 +43,7 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     private System.Threading.SendOrPostCallback modifyEventDescriptionOperationCompleted;
     
-    private System.Threading.SendOrPostCallback modifyEventOperationCompleted;
+    private System.Threading.SendOrPostCallback modifyEventDateOperationCompleted;
     
     private System.Threading.SendOrPostCallback modifyEventIconOperationCompleted;
     
@@ -99,7 +99,7 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     public event modifyEventDescriptionCompletedEventHandler modifyEventDescriptionCompleted;
     
     /// <remarks/>
-    public event modifyEventCompletedEventHandler modifyEventCompleted;
+    public event modifyEventDateCompletedEventHandler modifyEventDateCompleted;
     
     /// <remarks/>
     public event modifyEventIconCompletedEventHandler modifyEventIconCompleted;
@@ -230,9 +230,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getEvents", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getEvents() {
+    public Event[] getEvents() {
         object[] results = this.Invoke("getEvents", new object[0]);
-        return ((string)(results[0]));
+        return ((Event[])(results[0]));
     }
     
     /// <remarks/>
@@ -241,9 +241,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetEvents(System.IAsyncResult asyncResult) {
+    public Event[] EndgetEvents(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((Event[])(results[0]));
     }
     
     /// <remarks/>
@@ -268,10 +268,10 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getEventUpdates", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getEventUpdates(System.DateTime modifiedAfter) {
+    public EventUpdate[] getEventUpdates(System.DateTime modifiedAfter) {
         object[] results = this.Invoke("getEventUpdates", new object[] {
                     modifiedAfter});
-        return ((string)(results[0]));
+        return ((EventUpdate[])(results[0]));
     }
     
     /// <remarks/>
@@ -281,9 +281,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetEventUpdates(System.IAsyncResult asyncResult) {
+    public EventUpdate[] EndgetEventUpdates(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((EventUpdate[])(results[0]));
     }
     
     /// <remarks/>
@@ -309,10 +309,10 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getEvent", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getEvent(int id) {
+    public Event getEvent(int id) {
         object[] results = this.Invoke("getEvent", new object[] {
                     id});
-        return ((string)(results[0]));
+        return ((Event)(results[0]));
     }
     
     /// <remarks/>
@@ -322,9 +322,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetEvent(System.IAsyncResult asyncResult) {
+    public Event EndgetEvent(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((Event)(results[0]));
     }
     
     /// <remarks/>
@@ -475,44 +475,44 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/modifyEvent", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public void modifyEvent(int event_id, string newTitle) {
-        this.Invoke("modifyEvent", new object[] {
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/modifyEventDate", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+    public void modifyEventDate(int event_id, System.DateTime newDate) {
+        this.Invoke("modifyEventDate", new object[] {
                     event_id,
-                    newTitle});
+                    newDate});
     }
     
     /// <remarks/>
-    public System.IAsyncResult BeginmodifyEvent(int event_id, string newTitle, System.AsyncCallback callback, object asyncState) {
-        return this.BeginInvoke("modifyEvent", new object[] {
+    public System.IAsyncResult BeginmodifyEventDate(int event_id, System.DateTime newDate, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("modifyEventDate", new object[] {
                     event_id,
-                    newTitle}, callback, asyncState);
+                    newDate}, callback, asyncState);
     }
     
     /// <remarks/>
-    public void EndmodifyEvent(System.IAsyncResult asyncResult) {
+    public void EndmodifyEventDate(System.IAsyncResult asyncResult) {
         this.EndInvoke(asyncResult);
     }
     
     /// <remarks/>
-    public void modifyEventAsync(int event_id, string newTitle) {
-        this.modifyEventAsync(event_id, newTitle, null);
+    public void modifyEventDateAsync(int event_id, System.DateTime newDate) {
+        this.modifyEventDateAsync(event_id, newDate, null);
     }
     
     /// <remarks/>
-    public void modifyEventAsync(int event_id, string newTitle, object userState) {
-        if ((this.modifyEventOperationCompleted == null)) {
-            this.modifyEventOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmodifyEventOperationCompleted);
+    public void modifyEventDateAsync(int event_id, System.DateTime newDate, object userState) {
+        if ((this.modifyEventDateOperationCompleted == null)) {
+            this.modifyEventDateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmodifyEventDateOperationCompleted);
         }
-        this.InvokeAsync("modifyEvent", new object[] {
+        this.InvokeAsync("modifyEventDate", new object[] {
                     event_id,
-                    newTitle}, this.modifyEventOperationCompleted, userState);
+                    newDate}, this.modifyEventDateOperationCompleted, userState);
     }
     
-    private void OnmodifyEventOperationCompleted(object arg) {
-        if ((this.modifyEventCompleted != null)) {
+    private void OnmodifyEventDateOperationCompleted(object arg) {
+        if ((this.modifyEventDateCompleted != null)) {
             System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-            this.modifyEventCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            this.modifyEventDateCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
     }
     
@@ -560,21 +560,23 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/addTick", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public bool addTick(int event_id, System.DateTime reported, string author, string message) {
+    public bool addTick(int event_id, System.DateTime reported, string author, string title, string message) {
         object[] results = this.Invoke("addTick", new object[] {
                     event_id,
                     reported,
                     author,
+                    title,
                     message});
         return ((bool)(results[0]));
     }
     
     /// <remarks/>
-    public System.IAsyncResult BeginaddTick(int event_id, System.DateTime reported, string author, string message, System.AsyncCallback callback, object asyncState) {
+    public System.IAsyncResult BeginaddTick(int event_id, System.DateTime reported, string author, string title, string message, System.AsyncCallback callback, object asyncState) {
         return this.BeginInvoke("addTick", new object[] {
                     event_id,
                     reported,
                     author,
+                    title,
                     message}, callback, asyncState);
     }
     
@@ -585,12 +587,12 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public void addTickAsync(int event_id, System.DateTime reported, string author, string message) {
-        this.addTickAsync(event_id, reported, author, message, null);
+    public void addTickAsync(int event_id, System.DateTime reported, string author, string title, string message) {
+        this.addTickAsync(event_id, reported, author, title, message, null);
     }
     
     /// <remarks/>
-    public void addTickAsync(int event_id, System.DateTime reported, string author, string message, object userState) {
+    public void addTickAsync(int event_id, System.DateTime reported, string author, string title, string message, object userState) {
         if ((this.addTickOperationCompleted == null)) {
             this.addTickOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddTickOperationCompleted);
         }
@@ -598,6 +600,7 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
                     event_id,
                     reported,
                     author,
+                    title,
                     message}, this.addTickOperationCompleted, userState);
     }
     
@@ -610,10 +613,10 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getTick", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getTick(int id) {
+    public Tick getTick(int id) {
         object[] results = this.Invoke("getTick", new object[] {
                     id});
-        return ((string)(results[0]));
+        return ((Tick)(results[0]));
     }
     
     /// <remarks/>
@@ -623,9 +626,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetTick(System.IAsyncResult asyncResult) {
+    public Tick EndgetTick(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((Tick)(results[0]));
     }
     
     /// <remarks/>
@@ -651,11 +654,11 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getTickUpdates", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getTickUpdates(int event_id, System.DateTime modifiedAfter) {
+    public TickUpdate[] getTickUpdates(int event_id, System.DateTime modifiedAfter) {
         object[] results = this.Invoke("getTickUpdates", new object[] {
                     event_id,
                     modifiedAfter});
-        return ((string)(results[0]));
+        return ((TickUpdate[])(results[0]));
     }
     
     /// <remarks/>
@@ -666,9 +669,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetTickUpdates(System.IAsyncResult asyncResult) {
+    public TickUpdate[] EndgetTickUpdates(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((TickUpdate[])(results[0]));
     }
     
     /// <remarks/>
@@ -695,10 +698,10 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getAllTicks", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getAllTicks(int event_id) {
+    public Tick[] getAllTicks(int event_id) {
         object[] results = this.Invoke("getAllTicks", new object[] {
                     event_id});
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -708,9 +711,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetAllTicks(System.IAsyncResult asyncResult) {
+    public Tick[] EndgetAllTicks(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -736,11 +739,11 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getAllTicksSince", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getAllTicksSince(int event_id, System.DateTime after) {
+    public Tick[] getAllTicksSince(int event_id, System.DateTime after) {
         object[] results = this.Invoke("getAllTicksSince", new object[] {
                     event_id,
                     after});
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -751,9 +754,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetAllTicksSince(System.IAsyncResult asyncResult) {
+    public Tick[] EndgetAllTicksSince(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -780,11 +783,11 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getTickUpdatesAdmin", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getTickUpdatesAdmin(int event_id, System.DateTime modifiedAfter) {
+    public TickUpdate[] getTickUpdatesAdmin(int event_id, System.DateTime modifiedAfter) {
         object[] results = this.Invoke("getTickUpdatesAdmin", new object[] {
                     event_id,
                     modifiedAfter});
-        return ((string)(results[0]));
+        return ((TickUpdate[])(results[0]));
     }
     
     /// <remarks/>
@@ -795,9 +798,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetTickUpdatesAdmin(System.IAsyncResult asyncResult) {
+    public TickUpdate[] EndgetTickUpdatesAdmin(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((TickUpdate[])(results[0]));
     }
     
     /// <remarks/>
@@ -824,10 +827,10 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getAllTicksAdmin", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getAllTicksAdmin(int event_id) {
+    public Tick[] getAllTicksAdmin(int event_id) {
         object[] results = this.Invoke("getAllTicksAdmin", new object[] {
                     event_id});
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -837,9 +840,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetAllTicksAdmin(System.IAsyncResult asyncResult) {
+    public Tick[] EndgetAllTicksAdmin(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -865,11 +868,11 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("LiveTickerService/LiveTickerService/getAllTicksSinceAdmin", RequestNamespace="LiveTickerService", ResponseNamespace="LiveTickerService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-    public string getAllTicksSinceAdmin(int event_id, System.DateTime after) {
+    public Tick[] getAllTicksSinceAdmin(int event_id, System.DateTime after) {
         object[] results = this.Invoke("getAllTicksSinceAdmin", new object[] {
                     event_id,
                     after});
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -880,9 +883,9 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
     }
     
     /// <remarks/>
-    public string EndgetAllTicksSinceAdmin(System.IAsyncResult asyncResult) {
+    public Tick[] EndgetAllTicksSinceAdmin(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((string)(results[0]));
+        return ((Tick[])(results[0]));
     }
     
     /// <remarks/>
@@ -1038,6 +1041,271 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="LiveTickerService")]
+public partial class Event {
+    
+    private int idField;
+    
+    private string textField;
+    
+    private string descriptionField;
+    
+    private byte[] iconField;
+    
+    private System.DateTime whenField;
+    
+    /// <remarks/>
+    public int id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string text {
+        get {
+            return this.textField;
+        }
+        set {
+            this.textField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string description {
+        get {
+            return this.descriptionField;
+        }
+        set {
+            this.descriptionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+    public byte[] icon {
+        get {
+            return this.iconField;
+        }
+        set {
+            this.iconField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public System.DateTime when {
+        get {
+            return this.whenField;
+        }
+        set {
+            this.whenField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="LiveTickerService")]
+public partial class TickUpdate {
+    
+    private int tick_idField;
+    
+    private string reasonField;
+    
+    /// <remarks/>
+    public int tick_id {
+        get {
+            return this.tick_idField;
+        }
+        set {
+            this.tick_idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string reason {
+        get {
+            return this.reasonField;
+        }
+        set {
+            this.reasonField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="LiveTickerService")]
+public partial class Tick {
+    
+    private int idField;
+    
+    private int event_idField;
+    
+    private bool is_publishedField;
+    
+    private bool is_deletedField;
+    
+    private System.DateTime reportedField;
+    
+    private System.DateTime modifiedField;
+    
+    private System.DateTime createdField;
+    
+    private string authorField;
+    
+    private string titleField;
+    
+    private string messageField;
+    
+    /// <remarks/>
+    public int id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public int event_id {
+        get {
+            return this.event_idField;
+        }
+        set {
+            this.event_idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public bool is_published {
+        get {
+            return this.is_publishedField;
+        }
+        set {
+            this.is_publishedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public bool is_deleted {
+        get {
+            return this.is_deletedField;
+        }
+        set {
+            this.is_deletedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public System.DateTime reported {
+        get {
+            return this.reportedField;
+        }
+        set {
+            this.reportedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public System.DateTime modified {
+        get {
+            return this.modifiedField;
+        }
+        set {
+            this.modifiedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public System.DateTime created {
+        get {
+            return this.createdField;
+        }
+        set {
+            this.createdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string author {
+        get {
+            return this.authorField;
+        }
+        set {
+            this.authorField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string title {
+        get {
+            return this.titleField;
+        }
+        set {
+            this.titleField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string message {
+        get {
+            return this.messageField;
+        }
+        set {
+            this.messageField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="LiveTickerService")]
+public partial class EventUpdate {
+    
+    private int event_idField;
+    
+    private string reasonField;
+    
+    /// <remarks/>
+    public int event_id {
+        get {
+            return this.event_idField;
+        }
+        set {
+            this.event_idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public string reason {
+        get {
+            return this.reasonField;
+        }
+        set {
+            this.reasonField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
 public delegate void addEventCompletedEventHandler(object sender, addEventCompletedEventArgs e);
 
 /// <remarks/>
@@ -1106,10 +1374,10 @@ public partial class getEventsCompletedEventArgs : System.ComponentModel.AsyncCo
     }
     
     /// <remarks/>
-    public string Result {
+    public Event[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((Event[])(this.results[0]));
         }
     }
 }
@@ -1132,10 +1400,10 @@ public partial class getEventUpdatesCompletedEventArgs : System.ComponentModel.A
     }
     
     /// <remarks/>
-    public string Result {
+    public EventUpdate[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((EventUpdate[])(this.results[0]));
         }
     }
 }
@@ -1158,10 +1426,10 @@ public partial class getEventCompletedEventArgs : System.ComponentModel.AsyncCom
     }
     
     /// <remarks/>
-    public string Result {
+    public Event Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((Event)(this.results[0]));
         }
     }
 }
@@ -1202,7 +1470,7 @@ public delegate void modifyEventDescriptionCompletedEventHandler(object sender, 
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
-public delegate void modifyEventCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+public delegate void modifyEventDateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
@@ -1252,10 +1520,10 @@ public partial class getTickCompletedEventArgs : System.ComponentModel.AsyncComp
     }
     
     /// <remarks/>
-    public string Result {
+    public Tick Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((Tick)(this.results[0]));
         }
     }
 }
@@ -1278,10 +1546,10 @@ public partial class getTickUpdatesCompletedEventArgs : System.ComponentModel.As
     }
     
     /// <remarks/>
-    public string Result {
+    public TickUpdate[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((TickUpdate[])(this.results[0]));
         }
     }
 }
@@ -1304,10 +1572,10 @@ public partial class getAllTicksCompletedEventArgs : System.ComponentModel.Async
     }
     
     /// <remarks/>
-    public string Result {
+    public Tick[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((Tick[])(this.results[0]));
         }
     }
 }
@@ -1330,10 +1598,10 @@ public partial class getAllTicksSinceCompletedEventArgs : System.ComponentModel.
     }
     
     /// <remarks/>
-    public string Result {
+    public Tick[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((Tick[])(this.results[0]));
         }
     }
 }
@@ -1356,10 +1624,10 @@ public partial class getTickUpdatesAdminCompletedEventArgs : System.ComponentMod
     }
     
     /// <remarks/>
-    public string Result {
+    public TickUpdate[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((TickUpdate[])(this.results[0]));
         }
     }
 }
@@ -1382,10 +1650,10 @@ public partial class getAllTicksAdminCompletedEventArgs : System.ComponentModel.
     }
     
     /// <remarks/>
-    public string Result {
+    public Tick[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((Tick[])(this.results[0]));
         }
     }
 }
@@ -1408,10 +1676,10 @@ public partial class getAllTicksSinceAdminCompletedEventArgs : System.ComponentM
     }
     
     /// <remarks/>
-    public string Result {
+    public Tick[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((string)(this.results[0]));
+            return ((Tick[])(this.results[0]));
         }
     }
 }

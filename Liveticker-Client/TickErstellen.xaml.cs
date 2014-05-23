@@ -1,5 +1,6 @@
-﻿using System.Windows;
-using System.Xml;
+﻿using System;
+using System.Windows;
+using System.Windows.Documents;
 
 namespace Liveticker_Client
 {
@@ -9,30 +10,42 @@ namespace Liveticker_Client
     public partial class TickErstellen : Window
     {
         private LiveTickerService liveTickerService = new LiveTickerService();
-        private XmlDocument xmlDoc = new XmlDocument();
-
-        public TickErstellen()
+        private Tick tick;
+        
+        public TickErstellen(ref Tick tick)
         {
             InitializeComponent();
+            this.tick = tick;
         }
+
         private void cbxSportart_Loaded(object sender, RoutedEventArgs e)
         {
-            xmlDoc.LoadXml(liveTickerService.getEvents());
-            //MessageBox.Show(liveTickerService.getEvents()); // Debug
-            XmlNodeList entryNodeList = xmlDoc.GetElementsByTagName("Entry");
-            foreach (XmlNode entryNode in entryNodeList)
+            Event[] events = liveTickerService.getEvents();
+            foreach (Event ev in events)
             {
-                //entryNode.ChildNodes.Item(0).InnerText // <Id> Node
-                //entryNode.ChildNodes.Item(1).InnerText // <Text> Node
-
-                cbxSportart.Items.Add(entryNode.ChildNodes.Item(1).InnerText);
+                cbxSportart.Items.Add(ev.text);
             }
-
-            cbxSportart.SelectedIndex = 0;
         }
 
         private void btnTickErstellen_Click(object sender, RoutedEventArgs e)
         {
+            string message = new TextRange(rtbxBeschreibung.Document.ContentStart, rtbxBeschreibung.Document.ContentEnd).Text;
+            if (tbxTitle.Text != "" && cbxSportart.Text != "" && message != "")
+            {
+                DateTime currentDateTime = DateTime.UtcNow;
+
+                tick.author = "LiveTicker-Client";
+                tick.created = currentDateTime;
+                tick.event_id = cbxSportart.SelectedIndex;
+                tick.id = 0;
+                tick.is_deleted = false;
+                tick.is_published = false;
+                tick.message = message;
+                tick.modified = currentDateTime;
+                tick.reported = currentDateTime;
+                tick.title = tbxTitle.Text;
+            }
+
             this.Close();
         }
     }
