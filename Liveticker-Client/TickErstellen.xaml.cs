@@ -10,43 +10,58 @@ namespace Liveticker_Client
     public partial class TickErstellen : Window
     {
         private LiveTickerService liveTickerService = new LiveTickerService();
-        private Tick tick;
         
-        public TickErstellen(ref Tick tick)
+        public TickErstellen()
         {
             InitializeComponent();
-            this.tick = tick;
+        }
+
+        private void btnTickErstellen_Click(object sender, RoutedEventArgs e)
+        {
+            string message = new TextRange(rtbxBeschreibung.Document.ContentStart, rtbxBeschreibung.Document.ContentEnd).Text.TrimEnd();
+
+            if (tbxTitle.Text != "" && cbxSportart.SelectedIndex != -1 && message != "")
+            {
+                liveTickerService.addTick(this.cbxSportart.SelectedIndex, DateTime.UtcNow, "Liveticker-Client", tbxTitle.Text, message);
+            }
+            else
+            {
+                MessageBox.Show("Es müssen noch Daten eingegeben werden.");
+                return;
+            }
+            
+            this.Close();
+        }
+
+        private void btnAbbrechen_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void addEvent_Click(object sender, RoutedEventArgs e)
+        {
+            EventHinzufuegen eh = new EventHinzufuegen();
+            eh.ShowDialog();
         }
 
         private void cbxSportart_Loaded(object sender, RoutedEventArgs e)
         {
+            refreshEvents();
+        }
+
+        private void cbxSportart_DropDownOpened(object sender, EventArgs e)
+        {
+            refreshEvents();
+        }
+
+        private void refreshEvents()
+        {
+            cbxSportart.Items.Clear();
             Event[] events = liveTickerService.getEvents();
             foreach (Event ev in events)
             {
                 cbxSportart.Items.Add(ev.text);
             }
-        }
-
-        private void btnTickErstellen_Click(object sender, RoutedEventArgs e)
-        {
-            string message = new TextRange(rtbxBeschreibung.Document.ContentStart, rtbxBeschreibung.Document.ContentEnd).Text;
-            if (tbxTitle.Text != "" && cbxSportart.Text != "" && message != "")
-            {
-                DateTime currentDateTime = DateTime.UtcNow;
-
-                tick.author = "LiveTicker-Client";
-                tick.created = currentDateTime;
-                tick.event_id = cbxSportart.SelectedIndex;
-                tick.id = 0;
-                tick.is_deleted = false;
-                tick.is_published = false;
-                tick.message = message;
-                tick.modified = currentDateTime;
-                tick.reported = currentDateTime;
-                tick.title = tbxTitle.Text;
-            }
-
-            this.Close();
         }
     }
 }

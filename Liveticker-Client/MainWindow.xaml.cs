@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,10 +25,10 @@ namespace Liveticker_Client
         /// <param name="title">...</param>
         /// <param name="description">...</param>
         /// <param name="icon">...</param>
-        private void addEvent(DateTime date, string title, string description, System.Drawing.Image icon)
+        private void addEvent(DateTime date, string title, string description, System.Windows.Media.Imaging.BitmapImage icon) //TODO: es gibt kein Image mehr... D: musst du dich bitte neu drum kümmern.
         {
             MemoryStream stream = new MemoryStream();
-            icon.Save(stream, ImageFormat.Jpeg);
+            //icon.Save(stream, ImageFormat.Jpeg);
             liveTickerService.addEvent(title, description, stream.ToArray(), date);
         }
 
@@ -174,15 +173,9 @@ namespace Liveticker_Client
         /// <param name="e"></param>
         private void btnTicketVerfassen_Click(object sender, RoutedEventArgs e)
         {
-            Tick tick = new Tick();
-            TickErstellen te = new TickErstellen(ref tick);
-            te.ShowDialog(); // Öffnen so das das MainWindow nicht mehr anklickbar ist.
-
-            if (tick.author != null)
-            {
-                //TODO: später aktivieren
-                //liveTickerService.addTick(tick.event_id, tick.reported, tick.author, tick.title, tick.message);
-            }
+            TickErstellen te = new TickErstellen();
+            te.ShowDialog();
+            refreshListView();
         }
 
         private void listViewItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -215,25 +208,6 @@ namespace Liveticker_Client
             #endregion Verhindere Bug
 
             refreshListView();
-        }
-
-        /// <summary>
-        /// <para>Handled eingaben die an das gesamte Fenster gerichtet sind.</para>
-        /// <para>Wird benötigt um das Fenster zu schließen.</para>
-        /// </summary>
-        /// <param name="sender">...</param>
-        /// <param name="e">...</param>
-        private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case System.Windows.Input.Key.Escape:
-                    this.Close();
-                    break;
-
-                default:
-                    break;
-            }
         }
     }
 }

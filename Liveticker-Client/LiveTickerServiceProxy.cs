@@ -16,12 +16,12 @@ using System.Web.Services.Protocols;
 using System.Xml.Serialization;
 
 // 
-// Dieser Quellcode wurde automatisch generiert von wsdl, Version=4.0.30319.18020.
+// Dieser Quellcode wurde automatisch generiert von wsdl, Version=4.0.30319.33440.
 // 
 
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_LiveTickerService", Namespace="LiveTickerService")]
@@ -1040,7 +1040,7 @@ public partial class LiveTickerService : System.Web.Services.Protocols.SoapHttpC
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1110,7 +1110,7 @@ public partial class Event {
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1143,7 +1143,7 @@ public partial class TickUpdate {
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1272,7 +1272,7 @@ public partial class Tick {
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1305,11 +1305,11 @@ public partial class EventUpdate {
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void addEventCompletedEventHandler(object sender, addEventCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class addEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1331,11 +1331,11 @@ public partial class addEventCompletedEventArgs : System.ComponentModel.AsyncCom
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void deleteEventCompletedEventHandler(object sender, deleteEventCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class deleteEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1357,11 +1357,11 @@ public partial class deleteEventCompletedEventArgs : System.ComponentModel.Async
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getEventsCompletedEventHandler(object sender, getEventsCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getEventsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1383,11 +1383,11 @@ public partial class getEventsCompletedEventArgs : System.ComponentModel.AsyncCo
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getEventUpdatesCompletedEventHandler(object sender, getEventUpdatesCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getEventUpdatesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1409,11 +1409,11 @@ public partial class getEventUpdatesCompletedEventArgs : System.ComponentModel.A
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getEventCompletedEventHandler(object sender, getEventCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1435,11 +1435,11 @@ public partial class getEventCompletedEventArgs : System.ComponentModel.AsyncCom
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getIconForEventCompletedEventHandler(object sender, getIconForEventCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getIconForEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1461,27 +1461,27 @@ public partial class getIconForEventCompletedEventArgs : System.ComponentModel.A
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void modifyEventTitleCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void modifyEventDescriptionCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void modifyEventDateCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void modifyEventIconCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void addTickCompletedEventHandler(object sender, addTickCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class addTickCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1503,11 +1503,11 @@ public partial class addTickCompletedEventArgs : System.ComponentModel.AsyncComp
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getTickCompletedEventHandler(object sender, getTickCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getTickCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1529,11 +1529,11 @@ public partial class getTickCompletedEventArgs : System.ComponentModel.AsyncComp
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getTickUpdatesCompletedEventHandler(object sender, getTickUpdatesCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getTickUpdatesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1555,11 +1555,11 @@ public partial class getTickUpdatesCompletedEventArgs : System.ComponentModel.As
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getAllTicksCompletedEventHandler(object sender, getAllTicksCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getAllTicksCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1581,11 +1581,11 @@ public partial class getAllTicksCompletedEventArgs : System.ComponentModel.Async
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getAllTicksSinceCompletedEventHandler(object sender, getAllTicksSinceCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getAllTicksSinceCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1607,11 +1607,11 @@ public partial class getAllTicksSinceCompletedEventArgs : System.ComponentModel.
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getTickUpdatesAdminCompletedEventHandler(object sender, getTickUpdatesAdminCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getTickUpdatesAdminCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1633,11 +1633,11 @@ public partial class getTickUpdatesAdminCompletedEventArgs : System.ComponentMod
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getAllTicksAdminCompletedEventHandler(object sender, getAllTicksAdminCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getAllTicksAdminCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1659,11 +1659,11 @@ public partial class getAllTicksAdminCompletedEventArgs : System.ComponentModel.
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void getAllTicksSinceAdminCompletedEventHandler(object sender, getAllTicksSinceAdminCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class getAllTicksSinceAdminCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1685,11 +1685,11 @@ public partial class getAllTicksSinceAdminCompletedEventArgs : System.ComponentM
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void publishTickCompletedEventHandler(object sender, publishTickCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class publishTickCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1711,11 +1711,11 @@ public partial class publishTickCompletedEventArgs : System.ComponentModel.Async
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void deleteTickCompletedEventHandler(object sender, deleteTickCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class deleteTickCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1737,11 +1737,11 @@ public partial class deleteTickCompletedEventArgs : System.ComponentModel.AsyncC
 }
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 public delegate void canUpdateCacheCompletedEventHandler(object sender, canUpdateCacheCompletedEventArgs e);
 
 /// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class canUpdateCacheCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
