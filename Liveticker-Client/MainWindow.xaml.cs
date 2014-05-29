@@ -69,6 +69,8 @@ namespace Liveticker_Client
 
         private void tabControl1_Loaded(object sender, RoutedEventArgs e)
         {
+            tabControl1.Items.Clear();
+
             Event[] events = liveTickerService.getEvents();
             foreach (Event ev in events)
             {
@@ -119,6 +121,7 @@ namespace Liveticker_Client
                 tabitem.Tag = ev;
                 tabitem.Content = grid;
                 tabitem.GotFocus += new RoutedEventHandler(tabitem_GotFocus);
+                tabitem.ToolTip = ev.description;
 
                 tabControl1.Items.Add(tabitem);
             }
@@ -163,6 +166,7 @@ namespace Liveticker_Client
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: Vielleicht besser this.tabControl1_Loaded(sender, e);
             refreshListView();
         }
 
@@ -175,7 +179,7 @@ namespace Liveticker_Client
         {
             TickErstellen te = new TickErstellen();
             te.ShowDialog();
-            refreshListView();
+            this.tabControl1_Loaded(sender, e);
         }
 
         private void listViewItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -183,7 +187,10 @@ namespace Liveticker_Client
             ListViewItem selected = (ListViewItem)sender;
             Tick tick = (Tick)(selected.Tag);
 
-            MessageBox.Show("Ticketinformationen:\n"
+            TickUpdaten tu = new TickUpdaten(ref tick);
+            tu.ShowDialog();
+
+            /*MessageBox.Show("Ticketinformationen:\n"
                 + "ID: " + tick.id + "\n"
                 + "EventId: " + tick.event_id + "\n"
                 + "IsPublished: " + tick.is_published + "\n"
@@ -192,7 +199,7 @@ namespace Liveticker_Client
                 + "Author: " + tick.author + "\n"
                 + "Title: " + tick.title + "\n"
                 + "Text: " + tick.message
-                );
+                );*/
         }
 
         private void tabitem_GotFocus(object sender, RoutedEventArgs e)

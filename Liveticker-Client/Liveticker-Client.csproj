@@ -60,6 +60,9 @@
     <Compile Include="TickErstellen.xaml.cs">
       <DependentUpon>TickErstellen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TickUpdaten.xaml.cs">
+      <DependentUpon>TickUpdaten.xaml</DependentUpon>
+    </Compile>
     <Page Include="EventHinzufuegen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -78,6 +81,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="TickErstellen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TickUpdaten.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

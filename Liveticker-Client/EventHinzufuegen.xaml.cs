@@ -32,7 +32,12 @@ namespace Liveticker_Client
                     return;
                 }
             }
-            liveTickerService.addEvent(this.tbxEvent.Text, "Sportart Beschreibung", null, DateTime.UtcNow);
+
+            //TODO: Soll später Icon sein.
+            byte[] barray = new byte[1];
+            barray[0] = 0;
+
+            liveTickerService.addEvent(this.tbxEvent.Text, "Sportart Beschreibung", barray, DateTime.UtcNow);
             this.Close();
         }
     }

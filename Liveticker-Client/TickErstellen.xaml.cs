@@ -10,7 +10,7 @@ namespace Liveticker_Client
     public partial class TickErstellen : Window
     {
         private LiveTickerService liveTickerService = new LiveTickerService();
-        
+
         public TickErstellen()
         {
             InitializeComponent();
@@ -22,14 +22,15 @@ namespace Liveticker_Client
 
             if (tbxTitle.Text != "" && cbxSportart.SelectedIndex != -1 && message != "")
             {
-                liveTickerService.addTick(this.cbxSportart.SelectedIndex, DateTime.UtcNow, "Liveticker-Client", tbxTitle.Text, message);
+                Event[] events = liveTickerService.getEvents();
+                liveTickerService.addTick(events[this.cbxSportart.SelectedIndex].id, DateTime.UtcNow, "Liveticker-Client", tbxTitle.Text, message);
             }
             else
             {
                 MessageBox.Show("Es müssen noch Daten eingegeben werden.");
                 return;
             }
-            
+
             this.Close();
         }
 
