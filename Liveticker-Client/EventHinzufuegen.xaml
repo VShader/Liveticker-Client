@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Sportart Hinzufügen" Width="307" Height="131" FontSize="16" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBox Name="tbxEvent" VerticalAlignment="Top" Margin="10,10,10,0" Height="30"/>
+        <TextBox Name="tbxEvent" VerticalAlignment="Top" Margin="10,10,10,0" Height="30" />
         <Button Content="Abbrechen" Padding="6,6" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnAbbrechen_Click" Margin="10,0,0,10"></Button>
         <Button Content="Sportart Hinzufügen >" Padding="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="btnAddEvent_Click" Margin="0,0,10,10"></Button>
     </Grid>

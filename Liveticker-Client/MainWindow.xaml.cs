@@ -91,8 +91,17 @@ namespace Liveticker_Client
                 gridviewcolumnId.DisplayMemberBinding = new Binding("Id");
                 gridviewcolumnEventId.Header = "Event ID";
                 gridviewcolumnEventId.DisplayMemberBinding = new Binding("EventId");
+
                 gridviewcolumnIsPublished.Header = "Veröffentlicht?";
-                gridviewcolumnIsPublished.DisplayMemberBinding = new Binding("IsPublished");
+                DataTemplate dt_isPublished = new DataTemplate();
+                FrameworkElementFactory factory = new FrameworkElementFactory(typeof(CheckBox));
+                factory.SetValue(CheckBox.MarginProperty, new Thickness(40, 0, 40, 0));
+                Binding binding = new Binding("IsPublished");
+                binding.Mode = BindingMode.OneWay;
+                factory.SetBinding(CheckBox.IsCheckedProperty, binding);
+                dt_isPublished.VisualTree = factory;
+                gridviewcolumnIsPublished.CellTemplate = dt_isPublished;
+
                 gridviewcolumnReported.Header = "Zeit";
                 gridviewcolumnReported.DisplayMemberBinding = new Binding("Reported");
                 gridviewcolumnModified.Header = "Zuletzt geändert";
@@ -117,11 +126,14 @@ namespace Liveticker_Client
 
                 grid.Children.Add(listview);
 
-                tabitem.Header = ev.text.ToUpper();
+                TextBlock tabitemheader = new TextBlock();
+                tabitemheader.Text = ev.text.ToUpper();
+                tabitemheader.ToolTip = ev.description;
+
+                tabitem.Header = tabitemheader;
                 tabitem.Tag = ev;
                 tabitem.Content = grid;
                 tabitem.GotFocus += new RoutedEventHandler(tabitem_GotFocus);
-                tabitem.ToolTip = ev.description;
 
                 tabControl1.Items.Add(tabitem);
             }
@@ -170,15 +182,11 @@ namespace Liveticker_Client
             refreshListView();
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnTicketVerfassen_Click(object sender, RoutedEventArgs e)
         {
             TickErstellen te = new TickErstellen();
             te.ShowDialog();
+
             this.tabControl1_Loaded(sender, e);
         }
 
@@ -190,16 +198,7 @@ namespace Liveticker_Client
             TickUpdaten tu = new TickUpdaten(ref tick);
             tu.ShowDialog();
 
-            /*MessageBox.Show("Ticketinformationen:\n"
-                + "ID: " + tick.id + "\n"
-                + "EventId: " + tick.event_id + "\n"
-                + "IsPublished: " + tick.is_published + "\n"
-                + "Reported: " + tick.reported + "\n"
-                + "Modified: " + tick.modified + "\n"
-                + "Author: " + tick.author + "\n"
-                + "Title: " + tick.title + "\n"
-                + "Text: " + tick.message
-                );*/
+            this.tabControl1_Loaded(sender, e);
         }
 
         private void tabitem_GotFocus(object sender, RoutedEventArgs e)
