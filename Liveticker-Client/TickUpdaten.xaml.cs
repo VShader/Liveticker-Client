@@ -29,16 +29,37 @@ namespace Liveticker_Client
                 index++;
             }
             this.cbxSportart.SelectedIndex = index;
-            this.rtbxBeschreibung.AppendText(tick.message);
+            this.tbxBeschreibung.Text = tick.message;
         }
 
         private void btnTickUpdaten_Click(object sender, RoutedEventArgs e)
         {
-            if (this.cbVeroeffentlicht.IsChecked == true)
+            if (this.cbVeroeffentlicht.IsChecked == true && tick.is_published == false)
             {
                 liveTickerService.publishTick(tick.id);
             }
-            //TODO: modify Tick
+            
+            if (tbxAutor.Text != "" && tbxTitle.Text != "" && cbxSportart.SelectedIndex != -1 && tbxBeschreibung.Text != "")
+            {
+                Event[] events = liveTickerService.getEvents();
+                if (tbxAutor.Text != tick.author || tbxTitle.Text != tick.title || events[cbxSportart.SelectedIndex].id != tick.event_id || tbxBeschreibung.Text != tick.message)
+                {
+                    liveTickerService.deleteTick(tick.id);
+                    liveTickerService.addTick(events[this.cbxSportart.SelectedIndex].id, tick.reported, tbxAutor.Text, tbxTitle.Text, tbxBeschreibung.Text);
+                    //TODO: publish?!
+                }
+                else if (this.cbVeroeffentlicht.IsChecked == false && tick.is_published == true)
+                {
+                    liveTickerService.deleteTick(tick.id);
+                    liveTickerService.addTick(tick.event_id, tick.reported, tick.author, tick.title, tick.message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Es müssen noch Daten eingegeben werden.");
+                return;
+            }
+
             this.Close();
         }
 

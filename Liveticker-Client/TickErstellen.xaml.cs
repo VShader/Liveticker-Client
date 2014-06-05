@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Documents;
 
 namespace Liveticker_Client
 {
@@ -18,12 +17,10 @@ namespace Liveticker_Client
 
         private void btnTickErstellen_Click(object sender, RoutedEventArgs e)
         {
-            string message = new TextRange(rtbxBeschreibung.Document.ContentStart, rtbxBeschreibung.Document.ContentEnd).Text.TrimEnd();
-
-            if (tbxTitle.Text != "" && cbxSportart.SelectedIndex != -1 && message != "")
+            if (tbxAutor.Text != "" && tbxTitle.Text != "" && cbxSportart.SelectedIndex != -1 && tbxBeschreibung.Text != "")
             {
                 Event[] events = liveTickerService.getEvents();
-                liveTickerService.addTick(events[this.cbxSportart.SelectedIndex].id, DateTime.UtcNow, "Liveticker-Client", tbxTitle.Text, message);
+                liveTickerService.addTick(events[this.cbxSportart.SelectedIndex].id, DateTime.UtcNow, tbxAutor.Text, tbxTitle.Text, tbxBeschreibung.Text);
             }
             else
             {
