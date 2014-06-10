@@ -9,18 +9,20 @@ namespace Liveticker_Client
     public partial class TickErstellen : Window
     {
         private LiveTickerService liveTickerService = new LiveTickerService();
+        private int sport;
 
-        public TickErstellen()
+        public TickErstellen(int sport)
         {
             InitializeComponent();
+            this.sport = sport;
         }
 
         private void btnTickErstellen_Click(object sender, RoutedEventArgs e)
         {
-            if (tbxAutor.Text != "" && tbxTitle.Text != "" && cbxSportart.SelectedIndex != -1 && tbxBeschreibung.Text != "")
+            if (tbxAutor.Text != "" && tbxTitle.Text != "" && tbxBeschreibung.Text != "")
             {
                 Event[] events = liveTickerService.getEvents();
-                liveTickerService.addTick(events[this.cbxSportart.SelectedIndex].id, DateTime.UtcNow, tbxAutor.Text, tbxTitle.Text, tbxBeschreibung.Text);
+                liveTickerService.addTick(events[sport].id, DateTime.UtcNow, tbxAutor.Text, tbxTitle.Text, tbxBeschreibung.Text);
             }
             else
             {
@@ -36,30 +38,25 @@ namespace Liveticker_Client
             this.Close();
         }
 
-        private void addEvent_Click(object sender, RoutedEventArgs e)
-        {
-            EventHinzufuegen eh = new EventHinzufuegen();
-            eh.ShowDialog();
-        }
 
-        private void cbxSportart_Loaded(object sender, RoutedEventArgs e)
-        {
-            refreshEvents();
-        }
+        //private void cbxSportart_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    refreshEvents();
+        //}
 
-        private void cbxSportart_DropDownOpened(object sender, EventArgs e)
-        {
-            refreshEvents();
-        }
+        //private void cbxSportart_DropDownOpened(object sender, EventArgs e)
+        //{
+        //    refreshEvents();
+        //}
 
-        private void refreshEvents()
-        {
-            cbxSportart.Items.Clear();
-            Event[] events = liveTickerService.getEvents();
-            foreach (Event ev in events)
-            {
-                cbxSportart.Items.Add(ev.text);
-            }
-        }
+        //private void refreshEvents()
+        //{
+        //    cbxSportart.Items.Clear();
+        //    Event[] events = liveTickerService.getEvents();
+        //    foreach (Event ev in events)
+        //    {
+        //        cbxSportart.Items.Add(ev.text);
+        //    }
+        //}
     }
 }

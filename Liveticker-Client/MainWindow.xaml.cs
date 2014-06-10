@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Collections;
 
 namespace Liveticker_Client
 {
@@ -67,127 +68,143 @@ namespace Liveticker_Client
             //liveTickerService.modifyEvent(id, newTitle);
         }
 
-        private void tabControl1_Loaded(object sender, RoutedEventArgs e)
-        {
-            tabControl1.Items.Clear();
 
-            Event[] events = liveTickerService.getEvents();
+        private void EventBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            EventBox.Items.Clear();
+            //Event[] events = liveTickerService.getEvents();
+            ArrayList events = new ArrayList(liveTickerService.getEvents()) ;
+            //events.Sort();
+//            LiveTickerService.
             foreach (Event ev in events)
             {
-                GridViewColumn gridviewcolumnId = new GridViewColumn();
-                GridViewColumn gridviewcolumnEventId = new GridViewColumn();
-                GridViewColumn gridviewcolumnIsPublished = new GridViewColumn();
-                GridViewColumn gridviewcolumnReported = new GridViewColumn();
-                GridViewColumn gridviewcolumnModified = new GridViewColumn();
-                GridViewColumn gridviewcolumnAuthor = new GridViewColumn();
-                GridViewColumn gridviewcolumnTitle = new GridViewColumn();
-                GridViewColumn gridviewcolumnText = new GridViewColumn();
-                GridView gridview = new GridView();
-                ListView listview = new ListView();
-                Grid grid = new Grid();
-                TabItem tabitem = new TabItem();
-
-                gridviewcolumnId.Header = "ID";
-                gridviewcolumnId.DisplayMemberBinding = new Binding("Id");
-                gridviewcolumnEventId.Header = "Event ID";
-                gridviewcolumnEventId.DisplayMemberBinding = new Binding("EventId");
-
-                gridviewcolumnIsPublished.Header = "Veröffentlicht?";
-                DataTemplate dt_isPublished = new DataTemplate();
-                FrameworkElementFactory factory = new FrameworkElementFactory(typeof(CheckBox));
-                factory.SetValue(CheckBox.MarginProperty, new Thickness(40, 0, 40, 0));
-                Binding binding = new Binding("IsPublished");
-                binding.Mode = BindingMode.OneWay;
-                factory.SetBinding(CheckBox.IsCheckedProperty, binding);
-                dt_isPublished.VisualTree = factory;
-                gridviewcolumnIsPublished.CellTemplate = dt_isPublished;
-
-                gridviewcolumnReported.Header = "Zeit";
-                gridviewcolumnReported.DisplayMemberBinding = new Binding("Reported");
-                gridviewcolumnModified.Header = "Zuletzt geändert";
-                gridviewcolumnModified.DisplayMemberBinding = new Binding("Modified");
-                gridviewcolumnAuthor.Header = "Autor";
-                gridviewcolumnAuthor.DisplayMemberBinding = new Binding("Author");
-                gridviewcolumnTitle.Header = "Titel";
-                gridviewcolumnTitle.DisplayMemberBinding = new Binding("Title");
-                gridviewcolumnText.Header = "Beschreibung";
-                gridviewcolumnText.DisplayMemberBinding = new Binding("Text");
-
-                //gridview.Columns.Add(gridviewcolumnId);
-                //gridview.Columns.Add(gridviewcolumnEventId);
-                //gridview.Columns.Add(gridviewcolumnIsPublished);
-                gridview.Columns.Add(gridviewcolumnReported);
-                //gridview.Columns.Add(gridviewcolumnModified);
-                //gridview.Columns.Add(gridviewcolumnAuthor);
-                gridview.Columns.Add(gridviewcolumnTitle);
-                gridview.Columns.Add(gridviewcolumnText);
-
-                listview.View = gridview;
-
-                grid.Children.Add(listview);
-
-                TextBlock tabitemheader = new TextBlock();
-                tabitemheader.Text = ev.text.ToUpper();
-                tabitemheader.ToolTip = ev.description;
-
-                tabitem.Header = tabitemheader;
-                tabitem.Tag = ev;
-                tabitem.Content = grid;
-                tabitem.GotFocus += new RoutedEventHandler(tabitem_GotFocus);
-
-                tabControl1.Items.Add(tabitem);
+                EventBox.Items.Add(ev.text);
             }
-
-            refreshListView();
+            EventBox.SelectedIndex = 0;
+            //EventBox.Sorted(true);
         }
 
-        private void refreshListView()
-        {
-            TabItem currTabItem = (TabItem)tabControl1.SelectedItem;
-            if (currTabItem == null)
-            {
-                return; // Nichts zum Aktualisieren vorhanden.
-            }
-            ListView currListView = (ListView)((Grid)currTabItem.Content).Children[0];
+        //private void tabControl1_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    tabControl1.Items.Clear();
 
-            currListView.Items.Clear();
+        //    Event[] events = liveTickerService.getEvents();
+        //    foreach (Event ev in events)
+        //    {
+        //        GridViewColumn gridviewcolumnId = new GridViewColumn();
+        //        GridViewColumn gridviewcolumnEventId = new GridViewColumn();
+        //        GridViewColumn gridviewcolumnIsPublished = new GridViewColumn();
+        //        GridViewColumn gridviewcolumnReported = new GridViewColumn();
+        //        GridViewColumn gridviewcolumnModified = new GridViewColumn();
+        //        GridViewColumn gridviewcolumnAuthor = new GridViewColumn();
+        //        GridViewColumn gridviewcolumnTitle = new GridViewColumn();
+        //        GridViewColumn gridviewcolumnText = new GridViewColumn();
+        //        GridView gridview = new GridView();
+        //        ListView listview = new ListView();
+        //        Grid grid = new Grid();
+        //        TabItem tabitem = new TabItem();
 
-            Tick[] ticks = liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).id);
-            foreach (Tick tick in ticks)
-            {
-                ListViewItem listViewItem = new ListViewItem();
+        //        gridviewcolumnId.Header = "ID";
+        //        gridviewcolumnId.DisplayMemberBinding = new Binding("Id");
+        //        gridviewcolumnEventId.Header = "Event ID";
+        //        gridviewcolumnEventId.DisplayMemberBinding = new Binding("EventId");
 
-                listViewItem.Content = new
-                {
-                    Id = tick.id,
-                    EventId = tick.event_id,
-                    IsPublished = tick.is_published,
-                    Reported = tick.reported.ToString("HH:mm"),
-                    Modified = tick.modified.ToString("HH:mm"),
-                    Author = tick.author,
-                    Title = tick.title,
-                    Text = tick.message
-                };
-                listViewItem.Tag = tick;
+        //        gridviewcolumnIsPublished.Header = "Veröffentlicht?";
+        //        DataTemplate dt_isPublished = new DataTemplate();
+        //        FrameworkElementFactory factory = new FrameworkElementFactory(typeof(CheckBox));
+        //        factory.SetValue(CheckBox.MarginProperty, new Thickness(40, 0, 40, 0));
+        //        Binding binding = new Binding("IsPublished");
+        //        binding.Mode = BindingMode.OneWay;
+        //        factory.SetBinding(CheckBox.IsCheckedProperty, binding);
+        //        dt_isPublished.VisualTree = factory;
+        //        gridviewcolumnIsPublished.CellTemplate = dt_isPublished;
 
-                listViewItem.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(listViewItem_MouseDoubleClick);
+        //        gridviewcolumnReported.Header = "Zeit";
+        //        gridviewcolumnReported.DisplayMemberBinding = new Binding("Reported");
+        //        gridviewcolumnModified.Header = "Zuletzt geändert";
+        //        gridviewcolumnModified.DisplayMemberBinding = new Binding("Modified");
+        //        gridviewcolumnAuthor.Header = "Autor";
+        //        gridviewcolumnAuthor.DisplayMemberBinding = new Binding("Author");
+        //        gridviewcolumnTitle.Header = "Titel";
+        //        gridviewcolumnTitle.DisplayMemberBinding = new Binding("Title");
+        //        gridviewcolumnText.Header = "Beschreibung";
+        //        gridviewcolumnText.DisplayMemberBinding = new Binding("Text");
 
-                currListView.Items.Add(listViewItem);
-            }
-        }
+        //        //gridview.Columns.Add(gridviewcolumnId);
+        //        //gridview.Columns.Add(gridviewcolumnEventId);
+        //        //gridview.Columns.Add(gridviewcolumnIsPublished);
+        //        gridview.Columns.Add(gridviewcolumnReported);
+        //        //gridview.Columns.Add(gridviewcolumnModified);
+        //        //gridview.Columns.Add(gridviewcolumnAuthor);
+        //        gridview.Columns.Add(gridviewcolumnTitle);
+        //        gridview.Columns.Add(gridviewcolumnText);
+
+        //        listview.View = gridview;
+
+        //        grid.Children.Add(listview);
+
+        //        TextBlock tabitemheader = new TextBlock();
+        //        tabitemheader.Text = ev.text.ToUpper();
+        //        tabitemheader.ToolTip = ev.description;
+
+        //        tabitem.Header = tabitemheader;
+        //        tabitem.Tag = ev;
+        //        tabitem.Content = grid;
+        //        tabitem.GotFocus += new RoutedEventHandler(tabitem_GotFocus);
+
+        //        tabControl1.Items.Add(tabitem);
+        //    }
+
+        //    refreshListView();
+        //}
+
+        //private void refreshListView()
+        //{
+        //    TabItem currTabItem = (TabItem)tabControl1.SelectedItem;
+        //    if (currTabItem == null)
+        //    {
+        //        return; // Nichts zum Aktualisieren vorhanden.
+        //    }
+        //    ListView currListView = (ListView)((Grid)currTabItem.Content).Children[0];
+
+        //    currListView.Items.Clear();
+
+        //    Tick[] ticks = liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).id);
+        //    foreach (Tick tick in ticks)
+        //    {
+        //        ListViewItem listViewItem = new ListViewItem();
+
+        //        listViewItem.Content = new
+        //        {
+        //            Id = tick.id,
+        //            EventId = tick.event_id,
+        //            IsPublished = tick.is_published,
+        //            Reported = tick.reported.ToString("HH:mm"),
+        //            Modified = tick.modified.ToString("HH:mm"),
+        //            Author = tick.author,
+        //            Title = tick.title,
+        //            Text = tick.message
+        //        };
+        //        listViewItem.Tag = tick;
+
+        //        listViewItem.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(listViewItem_MouseDoubleClick);
+
+        //        currListView.Items.Add(listViewItem);
+        //    }
+        //}
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Vielleicht besser this.tabControl1_Loaded(sender, e);
-            refreshListView();
+            //refreshListView();
         }
 
         private void btnTicketVerfassen_Click(object sender, RoutedEventArgs e)
         {
-            TickErstellen te = new TickErstellen();
+            TickErstellen te = new TickErstellen(EventBox.SelectedIndex);
             te.ShowDialog();
 
-            this.tabControl1_Loaded(sender, e);
+           // this.tabControl1_Loaded(sender, e);
         }
 
         private void listViewItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -198,22 +215,35 @@ namespace Liveticker_Client
             TickUpdaten tu = new TickUpdaten(ref tick);
             tu.ShowDialog();
 
-            this.tabControl1_Loaded(sender, e);
+           // this.tabControl1_Loaded(sender, e);
         }
 
-        private void tabitem_GotFocus(object sender, RoutedEventArgs e)
+        private void EventBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            #region Verhindere Bug
 
-            TabItem currTabItem = (TabItem)tabControl1.SelectedItem;
-            ListView currListView = (ListView)((Grid)currTabItem.Content).Children[0];
-
-            //TODO: keine genaue Erklärung weshalb gecleared werden muss?!
-            currListView.Items.Clear();
-
-            #endregion Verhindere Bug
-
-            refreshListView();
         }
+
+        private void AddEvent_Click(object sender, RoutedEventArgs e)
+        {
+            EventHinzufuegen dialog = new EventHinzufuegen();
+            dialog.Show();
+        }
+
+        
+
+        //private void tabitem_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    #region Verhindere Bug
+
+        //    TabItem currTabItem = (TabItem)tabControl1.SelectedItem;
+        //    ListView currListView = (ListView)((Grid)currTabItem.Content).Children[0];
+
+        //    //TODO: keine genaue Erklärung weshalb gecleared werden muss?!
+        //    currListView.Items.Clear();
+
+        //    #endregion Verhindere Bug
+
+        //    refreshListView();
+        //}
     }
 }
