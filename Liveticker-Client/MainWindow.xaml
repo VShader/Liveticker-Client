@@ -7,14 +7,19 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="36" />
         </Grid.RowDefinitions>
+
+        <Image Name="icon" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100"/>
+        <ComboBox Name="EventBox"  HorizontalAlignment="Left" Margin="100,1,0,0" VerticalAlignment="Top" Width="338" SelectionChanged="EventBox_SelectionChanged" IsEditable="True" Loaded="EventBox_Loaded"/>
+        <Button Name="AddEvent"  Content="+" HorizontalAlignment="Left" Margin="439,1,0,0" VerticalAlignment="Top" Width="25" Click="AddEvent_Click"/>
         
-        <ComboBox Name="EventBox"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="338" SelectionChanged="EventBox_SelectionChanged" IsEditable="True" Loaded="EventBox_Loaded"/>
-        <Button Name="AddEvent"  Content="+" HorizontalAlignment="Left" Margin="339,1,0,0" VerticalAlignment="Top" Width="25" Click="AddEvent_Click"/>
-        
-        <ListView  Margin="0,27,0,0" VerticalAlignment="Top" >
+        <ListView  Name="List"  Margin="0,100,0,0" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Datum" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Header="Zeit" Width="50"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Header="Titel" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Header="Beschreibung" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Author}" Header="Author" Width="100"/>
                 </GridView>
             </ListView.View>
         </ListView>

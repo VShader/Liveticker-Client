@@ -71,18 +71,27 @@ namespace Liveticker_Client
 
         private void EventBox_Loaded(object sender, RoutedEventArgs e)
         {
+            //refreshEventBox();
+            //EventBox.SelectedIndex = 0;
+        }
+
+        private void refreshEventBox()
+        {
+            no_refresh = false;
             EventBox.Items.Clear();
             //Event[] events = liveTickerService.getEvents();
-            ArrayList events = new ArrayList(liveTickerService.getEvents()) ;
+            ArrayList events = new ArrayList(liveTickerService.getEvents());
             //events.Sort();
-//            LiveTickerService.
+            //            LiveTickerService.
             foreach (Event ev in events)
             {
                 EventBox.Items.Add(ev.text);
             }
-            EventBox.SelectedIndex = 0;
+            if (EventBox.SelectedIndex < 0) EventBox.SelectedIndex = 0;
+            no_refresh = true;
             //EventBox.Sorted(true);
         }
+
 
         //private void tabControl1_Loaded(object sender, RoutedEventArgs e)
         //{
@@ -158,45 +167,57 @@ namespace Liveticker_Client
         //    refreshListView();
         //}
 
-        //private void refreshListView()
-        //{
-        //    TabItem currTabItem = (TabItem)tabControl1.SelectedItem;
-        //    if (currTabItem == null)
-        //    {
-        //        return; // Nichts zum Aktualisieren vorhanden.
-        //    }
-        //    ListView currListView = (ListView)((Grid)currTabItem.Content).Children[0];
+        private void refreshListView()
+        {
+            //TabItem currTabItem = (TabItem)tabControl1.SelectedItem;
+            //if (currTabItem == null)
+            //{
+            //    return; // Nichts zum Aktualisieren vorhanden.
+            //}
+            //ListView currListView = (ListView)((Grid)currTabItem.Content).Children[0];
+            List.Items.Clear();
 
-        //    currListView.Items.Clear();
+            //currListView.Items.Clear();
 
-        //    Tick[] ticks = liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).id);
-        //    foreach (Tick tick in ticks)
-        //    {
-        //        ListViewItem listViewItem = new ListViewItem();
+            //Tick[] ticks = liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).id);
+            Event[] events = liveTickerService.getEvents();
+            Tick[] ticks = liveTickerService.getAllTicksAdmin(events[EventBox.SelectedIndex].id);
+            foreach (Tick tick in ticks)
+            {
+                if(tick.is_published)
+                {
+                    //List.Items.
+                    //List.Items.Add(tick.id);
+                }
+                ListViewItem listViewItem = new ListViewItem();
 
-        //        listViewItem.Content = new
-        //        {
-        //            Id = tick.id,
-        //            EventId = tick.event_id,
-        //            IsPublished = tick.is_published,
-        //            Reported = tick.reported.ToString("HH:mm"),
-        //            Modified = tick.modified.ToString("HH:mm"),
-        //            Author = tick.author,
-        //            Title = tick.title,
-        //            Text = tick.message
-        //        };
-        //        listViewItem.Tag = tick;
+                listViewItem.Content = new
+                {
+                //    Id = tick.id,
+                //    EventId = tick.event_id,
+                //    IsPublished = tick.is_published,
+                //    Reported = tick.reported.ToString("HH:mm"),
+                //    Modified = tick.modified.ToString("HH:mm"),
+                    Date = tick.modified.ToString("dd:MM:yyyy"),
+                    Time = tick.modified.ToString("HH:mm"),
+                    Title = tick.title,
+                    Description = tick.message,
+                    Author = tick.author,
+                };
+                //listViewItem.Tag = tick;
 
-        //        listViewItem.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(listViewItem_MouseDoubleClick);
+                //listViewItem.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(listViewItem_MouseDoubleClick);
 
-        //        currListView.Items.Add(listViewItem);
-        //    }
-        //}
+                List.Items.Add(listViewItem);
+                //List.ItemsSource = ticks;
+            }
+        }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Vielleicht besser this.tabControl1_Loaded(sender, e);
-            //refreshListView();
+            refreshEventBox();
+            refreshListView();
         }
 
         private void btnTicketVerfassen_Click(object sender, RoutedEventArgs e)
@@ -207,7 +228,7 @@ namespace Liveticker_Client
            // this.tabControl1_Loaded(sender, e);
         }
 
-        private void listViewItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void List_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ListViewItem selected = (ListViewItem)sender;
             Tick tick = (Tick)(selected.Tag);
@@ -218,16 +239,20 @@ namespace Liveticker_Client
            // this.tabControl1_Loaded(sender, e);
         }
 
-        private void EventBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void AddEvent_Click(object sender, RoutedEventArgs e)
         {
             EventHinzufuegen dialog = new EventHinzufuegen();
             dialog.Show();
         }
+
+
+        private void EventBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(no_refresh) refreshListView();
+        }
+
+
+        private bool no_refresh = false;
 
         
 
