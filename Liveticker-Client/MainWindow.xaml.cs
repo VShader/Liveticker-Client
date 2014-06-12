@@ -204,9 +204,9 @@ namespace Liveticker_Client
                     Description = tick.message,
                     Author = tick.author,
                 };
-                //listViewItem.Tag = tick;
+                listViewItem.Tag = tick;
 
-                //listViewItem.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(listViewItem_MouseDoubleClick);
+                listViewItem.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(listViewItem_MouseDoubleClick);
 
                 List.Items.Add(listViewItem);
                 //List.ItemsSource = ticks;
@@ -228,7 +228,7 @@ namespace Liveticker_Client
            // this.tabControl1_Loaded(sender, e);
         }
 
-        private void List_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void listViewItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ListViewItem selected = (ListViewItem)sender;
             Tick tick = (Tick)(selected.Tag);

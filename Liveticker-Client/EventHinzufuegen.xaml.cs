@@ -36,8 +36,6 @@ namespace Liveticker_Client
             }
 
             
-
-            //TODO: Soll später Icon sein.
             byte[] barray = new byte[1];
 
             System.Windows.Media.Imaging.JpegBitmapEncoder encoder = new System.Windows.Media.Imaging.JpegBitmapEncoder();
@@ -47,9 +45,6 @@ namespace Liveticker_Client
                 encoder.Save(ms);
                 barray = ms.ToArray();
             }
-
-
-            //barray[0] = 0;
 
             liveTickerService.addEvent(this.tbxEvent.Text, "Sportart Beschreibung", barray, DateTime.UtcNow);
             this.Close();
@@ -68,16 +63,12 @@ namespace Liveticker_Client
                     {
                         using (myStream)
                         {
-                            // Insert code to read the stream here.
                             bitmapImage = new System.Windows.Media.Imaging.BitmapImage();
                             bitmapImage.BeginInit();
                             bitmapImage.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
                             bitmapImage.StreamSource = myStream;
                             bitmapImage.EndInit();
                             icon.Source = bitmapImage;
-                                //System.Windows.Media.Imaging.BitmapFrame.Create(myStream.BaseStream);
-                                //(System.Windows.Controls.Image)Image.FromStream(myStream);
-
                         }
                     }
                 }
