@@ -252,7 +252,7 @@ namespace Liveticker_Client
             {
                 Event[] events = liveTickerService.getEvents();
                 byte[] tmp_icon = events[EventBox.SelectedIndex].icon;
-                if (tmp_icon != null || tmp_icon.Length > 1)
+                if (tmp_icon.Length > 1)
                 {
                     MemoryStream ms = new MemoryStream(tmp_icon);
                     System.Windows.Media.Imaging.BitmapImage i = new System.Windows.Media.Imaging.BitmapImage();
