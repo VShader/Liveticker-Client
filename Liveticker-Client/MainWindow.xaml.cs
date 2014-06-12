@@ -80,7 +80,16 @@ namespace Liveticker_Client
             no_refresh = false;
             EventBox.Items.Clear();
             //Event[] events = liveTickerService.getEvents();
-            ArrayList events = new ArrayList(liveTickerService.getEvents());
+            ArrayList events = null;
+            try 
+            { 
+                events = new ArrayList(liveTickerService.getEvents());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Server ist nicht erreichbar!");
+                return;
+            }
             //events.Sort();
             //            LiveTickerService.
             foreach (Event ev in events)
@@ -180,8 +189,16 @@ namespace Liveticker_Client
             //currListView.Items.Clear();
 
             //Tick[] ticks = liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).id);
-            Event[] events = liveTickerService.getEvents();
-            Tick[] ticks = liveTickerService.getAllTicksAdmin(events[EventBox.SelectedIndex].id);
+            try
+            {
+                Event[] events = liveTickerService.getEvents();
+                Tick[] ticks = liveTickerService.getAllTicksAdmin(events[EventBox.SelectedIndex].id);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Server ist nicht erreichbar!");
+                return;
+            }
             foreach (Tick tick in ticks)
             {
                 if(tick.is_published)
@@ -204,6 +221,12 @@ namespace Liveticker_Client
                     Description = tick.message,
                     Author = tick.author,
                 };
+                if (!tick.is_published)
+                {
+                    //listViewItem.FontStyle = 
+                    listViewItem.Background = new System.Windows.Media.LinearGradientBrush(System.Windows.Media.Colors.LightBlue, System.Windows.Media.Colors.SlateBlue, 90);
+                    listViewItem.FontStyle = FontStyles.Italic;
+                }
                 listViewItem.Tag = tick;
 
                 listViewItem.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(listViewItem_MouseDoubleClick);
