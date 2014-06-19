@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Collections;
 
 namespace Liveticker_Client
 {
@@ -189,10 +189,12 @@ namespace Liveticker_Client
             //currListView.Items.Clear();
 
             //Tick[] ticks = liveTickerService.getAllTicksAdmin(((Event)(currTabItem.Tag)).id);
+            Event[] events;
+            Tick[] ticks;
             try
             {
-                Event[] events = liveTickerService.getEvents();
-                Tick[] ticks = liveTickerService.getAllTicksAdmin(events[EventBox.SelectedIndex].id);
+                events = liveTickerService.getEvents();
+                ticks = liveTickerService.getAllTicksAdmin(events[EventBox.SelectedIndex].id);
             }
             catch (Exception e)
             {
@@ -273,7 +275,16 @@ namespace Liveticker_Client
         {
             if (no_refresh)
             {
-                Event[] events = liveTickerService.getEvents();
+                Event[] events;
+                try
+                {
+                    events = liveTickerService.getEvents();
+                }
+                catch(Exception)
+                {
+                    MessageBox.Show("Server ist nicht erreichbar!");
+                    return;
+                }
                 byte[] tmp_icon = events[EventBox.SelectedIndex].icon;
                 if (tmp_icon.Length > 1)
                 {
@@ -284,12 +295,36 @@ namespace Liveticker_Client
                     i.EndInit();
                     icon.Source = i;
                 }
+                else
+                {
+                    icon.Source = null;
+                }
                 refreshListView();
             }
         }
 
 
         private bool no_refresh = false;
+
+        private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show("Wollen Sie wirklich das Event Löschen?",
+                                                    "Event Löschen", System.Windows.Forms.MessageBoxButtons.YesNo);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                try
+                {
+                    Event[] events = liveTickerService.getEvents();
+                    liveTickerService.deleteEvent(events[EventBox.SelectedIndex].id);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Server ist nicht erreichbar!");
+                    return;
+                }
+                refreshListView();
+            }
+        }
 
         
 

@@ -37,13 +37,16 @@ namespace Liveticker_Client
 
             
             byte[] barray = new byte[1];
-
-            System.Windows.Media.Imaging.JpegBitmapEncoder encoder = new System.Windows.Media.Imaging.JpegBitmapEncoder();
-            encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(bitmapImage));
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-            {
-                encoder.Save(ms);
-                barray = ms.ToArray();
+       
+            if(icon.Source != null)
+            { 
+                System.Windows.Media.Imaging.JpegBitmapEncoder encoder = new System.Windows.Media.Imaging.JpegBitmapEncoder();
+                encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(bitmapImage));
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                {
+                    encoder.Save(ms);
+                    barray = ms.ToArray();
+                }
             }
 
             liveTickerService.addEvent(this.tbxEvent.Text, "Sportart Beschreibung", barray, DateTime.UtcNow);

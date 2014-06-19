@@ -11,6 +11,7 @@
         <Image Name="icon" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100"/>
         <ComboBox Name="EventBox"  HorizontalAlignment="Left" Margin="100,1,0,0" VerticalAlignment="Top" Width="338" SelectionChanged="EventBox_SelectionChanged" IsEditable="True" Loaded="EventBox_Loaded"/>
         <Button Name="AddEvent"  Content="+" HorizontalAlignment="Left" Margin="439,1,0,0" VerticalAlignment="Top" Width="25" Click="AddEvent_Click"/>
+        <Button Name="DeleteEvent"  Content="-" HorizontalAlignment="Left" Margin="466,1,0,0" VerticalAlignment="Top" Width="25" Click="DeleteEvent_Click"/>
         
         <ListView  Name="List"  Margin="0,100,0,0" VerticalAlignment="Top">
             <ListView.View>

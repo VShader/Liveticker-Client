@@ -19,15 +19,27 @@ namespace Liveticker_Client
 
         private void btnTickErstellen_Click(object sender, RoutedEventArgs e)
         {
+            if (sport == -1)
+            {
+                MessageBox.Show("Kein Event ausgewählt!");
+                this.Close();
+                return;
+            }
             if (tbxAutor.Text != "" && tbxTitle.Text != "" && tbxBeschreibung.Text != "")
             {
-                Event[] events = liveTickerService.getEvents();
-                liveTickerService.addTick(events[sport].id, DateTime.UtcNow, tbxAutor.Text, tbxTitle.Text, tbxBeschreibung.Text);
+                try
+                {
+                    Event[] events = liveTickerService.getEvents();
+                    liveTickerService.addTick(events[sport].id, DateTime.UtcNow, tbxAutor.Text, tbxTitle.Text, tbxBeschreibung.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Server ist nicht erreichbar!");
+                }
             }
             else
             {
                 MessageBox.Show("Es müssen noch Daten eingegeben werden.");
-                return;
             }
 
             this.Close();
